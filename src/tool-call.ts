@@ -19,7 +19,7 @@ function buildPodcastQueryFromMessage(message: string): object {
 export default async function toolCall(paramOne: string, paramTwo: string, envVar: string): Promise<string> {
     let result = '';
 
-    if (paramOne === 'podcast_nl') {
+    if (paramOne === 'podcast_nl' || paramOne === 'podcast nl') {
         // paramTwo is the user's message, envVar is the MongoDB URI
         try {
             const query = buildPodcastQueryFromMessage(paramTwo);
