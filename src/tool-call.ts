@@ -17,6 +17,18 @@ function buildPodcastQueryFromMessage(message: string): object {
 }
 
 export default async function toolCall(paramOne: string, paramTwo: string, envVar: string): Promise<string> {
+    // --- MongoDB connection test ---
+    try {
+        const client = new MongoClient(envVar);
+        await client.connect();
+        await client.close();
+        return "MongoDB connection successful!";
+    } catch (err: any) {
+        return `MongoDB connection failed: ${err.message}`;
+    }
+
+    /*
+    // --- Original logic commented out for testing ---
     console.log('paramOne:', paramOne);
     let result = '';
 
@@ -60,4 +72,5 @@ export default async function toolCall(paramOne: string, paramTwo: string, envVa
     }
 
     return result;
+    */
 }
