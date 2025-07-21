@@ -1,12 +1,12 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import express from 'express';
+import express, { Request, Response } from 'express';
 import toolCall from './tool-call';
 
 const app = express();
 const { MONGODB_URI, PORT } = process.env;
 
-app.get('/', async (req, res) => {
+app.get('/', async (req: Request, res: Response) => {
     // Read 'mode' and 'input' from the query string
     const { mode, input } = req.query;
     try {
