@@ -17,9 +17,13 @@ function buildPodcastQueryFromMessage(message: string): object {
 }
 
 export default async function toolCall(paramOne: string, paramTwo: string, envVar: string): Promise<string> {
+    console.log('paramOne:', paramOne);
     let result = '';
 
-    if (paramOne === 'podcast_nl' || paramOne === 'podcast nl') {
+    // Normalize mode: trim, lowercase, replace spaces with underscores
+    const normalizedMode = paramOne.trim().toLowerCase().replace(/\s+/, '_');
+
+    if (normalizedMode === 'podcast_nl') {
         // paramTwo is the user's message, envVar is the MongoDB URI
         try {
             const query = buildPodcastQueryFromMessage(paramTwo);
@@ -36,7 +40,7 @@ export default async function toolCall(paramOne: string, paramTwo: string, envVa
             console.error('MongoDB Error:', err); // Log full error
             result = `MongoDB Error: ${err.message}`;
         }
-    } else if (paramOne === 'mongo') {
+    } else if (normalizedMode === 'mongo') {
         try {
             const { collection, query } = JSON.parse(paramTwo);
             const client = new MongoClient(envVar);
