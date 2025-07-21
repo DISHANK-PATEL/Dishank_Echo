@@ -33,6 +33,7 @@ export default async function toolCall(paramOne: string, paramTwo: string, envVa
             result = JSON.stringify(data, null, 2);
             await client.close();
         } catch (err: any) {
+            console.error('MongoDB Error:', err); // Log full error
             result = `MongoDB Error: ${err.message}`;
         }
     } else if (paramOne === 'mongo') {
@@ -46,6 +47,7 @@ export default async function toolCall(paramOne: string, paramTwo: string, envVa
             result = JSON.stringify(data, null, 2);
             await client.close();
         } catch (err: any) {
+            console.error('MongoDB Error:', err); // Log full error
             result = `MongoDB Error: ${err.message}`;
         }
     } else {
